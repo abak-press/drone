@@ -44,24 +44,6 @@ type service struct {
 }
 
 func (s *service) Exceeded(ctx context.Context) (bool, error) {
-	if limit := s.license.Builds; limit > 0 {
-		count, _ := s.builds.Count(ctx)
-		if count > limit {
-			return true, core.ErrBuildLimit
-		}
-	}
-	if limit := s.license.Users; limit > 0 {
-		count, _ := s.users.Count(ctx)
-		if count > limit {
-			return true, core.ErrUserLimit
-		}
-	}
-	if limit := s.license.Repos; limit > 0 {
-		count, _ := s.repos.Count(ctx)
-		if count > limit {
-			return true, core.ErrRepoLimit
-		}
-	}
 	return false, nil
 }
 
